@@ -84,6 +84,15 @@ def copy_data(file_name, new_file_name):
     standart_write(new_file_name, data)
 
 
+def copy_row(file_name, row_number):
+    data = read_file(file_name)
+    if row_number <= len(data):
+        new_file_name = input('Введите имя нового файла: ')
+        standart_write(new_file_name, [data[row_number - 1]])
+    else:
+        print('Введен неверный номер строки')
+
+
 file_name = 'phone.csv'
 def main():
     while True:
@@ -96,12 +105,12 @@ def main():
             write_file(file_name)
         elif command == 'r':
             if not exists(file_name):
-                print('Файл отсутствует, пожалуйста создайте файл')
+                print('Файл отсутсвует, пожалуйста создайте файл')
                 continue
             print(*read_file(file_name))
         elif command == 'd':
             if not exists(file_name):
-                print('Файл отсутствует, пожалуйста создайте файл')
+                print('Файл отсутсвует, пожалуйста создайте файл')
                 continue
             remove_row(file_name)
         elif command == 'c':
@@ -110,6 +119,9 @@ def main():
                 print('Файл отсутствует, пожалуйста создайте файл')
                 continue
             copy_data(file_name, new_file_name)
+        elif command == 'cr':
+            row_number = int(input('Введите номер строки для копирования: '))
+            copy_row(file_name, row_number)
 
 
 main()
